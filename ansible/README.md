@@ -1,35 +1,29 @@
 # 競技用インスタンスのセットアップ方法
 
-## webapp
-
 ```bash
-$ ansible-playbook -i hosts image/ansible/playbooks.yml
+# webapp
+ansible-playbook -i hosts image/ansible/playbooks.yml
+
+# bench
+ansible-playbook -i hosts bench/ansible/playbooks.yml
 ```
 
-## bench
-
-```bash
-$ ansible-playbook -i hosts bench/ansible/playbooks.yml
-```
-
-## benchmakerを同梱したwebapp
+## benchmaker を 同梱した webapp
 
 webapp と benchmaker両方含む all in one なインスタンスをセットアップする場合
 
 ```bash
-$ ansible-playbook -i hosts image/ansible/playbooks.yml -e 'allinone=True'
-```
+# 起動
+ansible-playbook -i hosts image/ansible/playbooks.yml -e 'allinone=True'
 
-同梱した benchmarker を動作させるには以下のようにします。
-
-```sh
-$ sudo su - isucon
-$ /home/isucon/private_isu/benchmarker/bin/benchmarker -u /home/isucon/private_isu/benchmarker/userdata -t http://<target IP>
+# ベンチマーク実行
+sudo su - isucon
+/home/isucon/private_isu/benchmarker/bin/benchmarker -u /home/isucon/private_isu/benchmarker/userdata -t http://<target IP>
 ```
 
 ## ssh config の例
 
-```
+```: ~/.ssh/config
 Host isu-app
   IdentityFile ~/.ssh/xxx.pem
   HostName xxx.xxx.xxx.xxx
