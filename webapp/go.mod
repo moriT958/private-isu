@@ -1,6 +1,6 @@
 module github.com/catatsuy/private-isu/webapp
 
-go 1.23.0
+go 1.24.0
 
 require (
 	github.com/bradfitz/gomemcache v0.0.0-20250403215159-8d39553ac7cf

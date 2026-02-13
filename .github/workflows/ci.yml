@@ -57,12 +57,11 @@ jobs:
         run: |
           cd benchmarker
           docker run \
-            --network host \
-            --add-host host.docker.internal:host-gateway \
-            -i private-isu-benchmarker \
-            /bin/benchmarker \
-            -t http://host.docker.internal \
-            -u /opt/userdata \
+             --network private-isu_my_network \
+             -i private-isu-benchmarker \
+             /bin/benchmarker \
+             -t http://nginx \
+             -u /opt/userdata \
           | tee benchmark_output.json
 
       - name: Show logs

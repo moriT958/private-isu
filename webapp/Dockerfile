@@ -46,6 +46,7 @@ WORKDIR /home/webapp
 # Copy the executable from the "build" stage.
 COPY --from=build /bin/server /bin/
 COPY ./templates ./templates
+COPY ./public ./public
 
 # What the container should run when it is started.
 ENTRYPOINT [ "/bin/server" ]

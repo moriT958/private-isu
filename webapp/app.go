@@ -228,11 +228,12 @@ func makePosts(ctx context.Context, results []Post, csrfToken string, allComment
 
 func imageURL(p Post) string {
 	ext := ""
-	if p.Mime == "image/jpeg" {
+	switch p.Mime {
+	case "image/jpeg":
 		ext = ".jpg"
-	} else if p.Mime == "image/png" {
+	case "image/png":
 		ext = ".png"
-	} else if p.Mime == "image/gif" {
+	case "image/gif":
 		ext = ".gif"
 	}
 
