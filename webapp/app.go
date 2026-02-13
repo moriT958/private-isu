@@ -850,7 +850,7 @@ func main() {
 	}
 	defer db.Close()
 
-	root, err := os.OpenRoot("../public")
+	root, err := os.OpenRoot("./public")
 	if err != nil {
 		log.Fatalf("failed to open root: %v", err)
 	}

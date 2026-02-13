@@ -1,11 +1,26 @@
 ---
 - hosts: bench
   become: yes
-  become_user: isucon
   gather_facts: no
+  vars:
+    bench_dir: "/home/isucon/private_isu/benchmarker"
+    repo_root: "{{ playbook_dir }}/../../../"
   tasks:
-    - name: clean private_isu.git
-      file: path=/home/isucon/private_isu.git state=absent
-    - name: clone repos
-      git: repo=https://github.com/catatsuy/private-isu.git
-        dest=/home/isucon/private_isu.git
+    - name: Ensure benchmarker directory exists
+      file:
+        path: "{{ bench_dir }}"
+        state: directory
+        owner: isucon
+        group: isucon
+        mode: "0755"
+    - name: Sync benchmarker to server
+      ansible.builtin.synchronize:
+        src: "{{ repo_root }}/benchmarker/"
+        dest: "{{ bench_dir }}/"
+        delete: yes
+    - name: Fix ownership
+      file:
+        path: "{{ bench_dir }}"
+        owner: isucon
+        group: isucon
+        recurse: yes
